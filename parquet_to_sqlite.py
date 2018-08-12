@@ -9,7 +9,7 @@ def convert_table(source, table, conn, skip_indexes):
     logging.warning(f'Reading {table}')
     df = pd.read_parquet(os.path.join(source, table))
     logging.warning(f'Writing {table}')
-    df.to_sql(table, conn, index=False, if_exists='replace', index_label=[f'{table}_id'])
+    df.to_sql(table, conn, index=False, if_exists='replace')
     if not skip_indexes:
         logging.warning(f'Creating indexes for {table}')
         id_cols = [col for col in df.columns.tolist() if col.endswith('_id')]
